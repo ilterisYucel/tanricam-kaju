@@ -16,9 +16,25 @@ export default function GamePage() {
     const game = new Phaser.Game(createGameConfig(containerRef.current));
     (window as unknown as { __game?: Phaser.Game }).__game = game;
     const listeners: PluginListenerHandle[] = [];
+    const resizeGame = () => {
+      if (!game.scale || !game.canvas) return;
+      game.scale.refresh();
+    };
+    const resizeObserver =
+      typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(() => resizeGame())
+        : undefined;
+    resizeObserver?.observe(containerRef.current);
+    window.addEventListener('resize', resizeGame);
 
     if (Capacitor.isNativePlatform()) {
-      ScreenOrientation.lock({ orientation: 'landscape' }).catch(() => undefined);
+      ScreenOrientation.lock({ orientation: 'landscape' })
+        .then(() => {
+          // The WebView can miss the first resize while Android rotates.
+          setTimeout(resizeGame, 250);
+          setTimeout(resizeGame, 800);
+        })
+        .catch(() => undefined);
       StatusBar.hide().catch(() => undefined);
 
       void CapApp.addListener('backButton', () => {
@@ -38,6 +54,8 @@ export default function GamePage() {
     }
 
     return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', resizeGame);
       listeners.forEach((listener) => void listener.remove());
       game.destroy(true);
     };

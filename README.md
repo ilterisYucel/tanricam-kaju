@@ -1,6 +1,6 @@
 # Tanrıçam & Kaju — Hastane Nöbeti
 
-39 bölümlük, yatay 2D platformer. Nişanlın ve Kaju hastane yataklarından oluşan
+39 bölümlük, yatay 2D platformer. Yağmur ve Kaju hastane yataklarından oluşan
 zeminlerde ilerler; mikroplara **domestos**, insanlara **sarma** atar; suşi
 toplayarak saldırısını güçlendirir ve her bölümde bir minik dostu kurtarır.
 `helpless.png` içindeki 39 hayvanın tamamı birer bölümde kurtarılır.
@@ -11,14 +11,42 @@ toplayarak saldırısını güçlendirir ve her bölümde bir minik dostu kurtar
 - **Tasarım çözünürlüğü:** 1280×720, 16:9 yatay
 - **Kayıt:** `localStorage` (`tanricam-kaju-save-v1`)
 
-## Hızlı başlangıç
+## Monorepo (saru-nx)
+
+Bu uygulama `~/Documents/saru-nx/apps/tanricam-kaju` altında bir **git
+submodule**'dır. Monorepo kökünden:
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm nx run tanricam-kaju:serve
+pnpm nx run tanricam-kaju:build
+pnpm nx run tanricam-kaju:check
 ```
 
-Tarayıcıda `http://localhost:5173` (port doluysa Vite bir sonrakini seçer).
+Submodule commit/push:
+
+```bash
+cd ~/Documents/saru-nx
+git submodule update --init --recursive
+cd apps/tanricam-kaju
+git add -A && git commit -m "..." && git push
+cd ../..
+git add apps/tanricam-kaju
+git commit -m "chore: update tanricam-kaju submodule"
+git push
+```
+
+## Hızlı başlangıç
+
+Submodule tek başına açıldıysa:
+
+```bash
+pnpm install
+pnpm run dev
+```
+
+Monorepo içinde `pnpm install` monorepo kökünden çalıştırılır. Tarayıcıda
+`http://localhost:5173` (port doluysa Vite bir sonrakini seçer).
 
 ### Kontroller
 
@@ -44,8 +72,8 @@ girdi olarak kullanılır. Pipeline bu klasörü değiştirmez; üretilen çıkt
 `public/assets/game/` altına yazılır.
 
 ```bash
-npm run assets
-npm run validate:assets
+pnpm run assets
+pnpm run validate:assets
 ```
 
 `tools/build-assets.mjs`:
@@ -55,8 +83,21 @@ npm run validate:assets
 2. Frame'leri connected-component ile çıkarır (sheet'ler düzgün grid değil).
 3. Her animasyonu alt-merkez hizalı, eşit hücreli yatay strip'e dönüştürür.
 4. `src/game/data/manifest.json` ve `public/assets/game/` çıktısını üretir.
-5. `work/contact/` altında magenta arka planlı kontrol görselleri ve zemin
+5. `assets/logo.png`'yi temizleyip `public/assets/game/logo.png` olarak yazar.
+6. `work/contact/` altında magenta arka planlı kontrol görselleri ve zemin
    çarpışma çizgisi önizlemesi bırakır.
+
+Logo/splash ve uygulama ikonları için:
+
+```bash
+pnpm run assets
+pnpm run mobile:art
+```
+
+`pnpm run mobile:art`, aynı logoyu Android splash ekranlarına ve launcher
+ikonlarına basar. Splash; koyu yeşil zemin + logo + “TANRIÇAM & KAJU”
+yazısıdır; Android 12+ sistem splash'inde logo, web loading ekranında logo +
+başlık görünür.
 
 **Zemin çarpışması:** `zemin.png` görselinin üst sınırı kullanılmaz. Battaniye
 yüzeyi (~y=150/302) ölçülür; görünmez statik collider tam bu çizgide durur.
@@ -75,13 +116,13 @@ olarak durur. Eski `floor-ledge.png` kaldırıldı.
 grid kullanılmaz, böylece hiçbir hayvan ortadan kesilmez.
 
 Yeni asset eklerken `tools/build-assets.mjs` içindeki `FRAME_CONFIG` ve
-`MANUAL_CROPS` tablolarını güncelle, sonra `npm run assets` çalıştır.
+`MANUAL_CROPS` tablolarını güncelle, sonra `pnpm run assets` çalıştır.
 
 ## Bölüm doğrulama
 
 ```bash
-npm run validate:levels
-npm run preview:levels   # work/level-previews/01.png ... 39.png
+pnpm run validate:levels
+pnpm run preview:levels   # work/level-previews/01.png ... 39.png
 ```
 
 Bölümler `assets/levels/01.txt … 39.txt` ASCII matrix'leridir; format için
@@ -93,14 +134,14 @@ Hata varsa exit code 1 döner.
 Paket kontrolü:
 
 ```bash
-npm run check
+pnpm run check
 ```
 
 ## Web build
 
 ```bash
-npm run build
-npm run preview
+pnpm run build
+pnpm run preview
 ```
 
 Çıktı `dist/` altındadır. Vite `base: './'` olduğu için statik sunucuda ve
@@ -114,8 +155,8 @@ makinede sistemde JDK 17 vardı; build için geçici bir JDK 21 kullanıldı.
 Android Studio'nun kendi JBR 21'i varsa onu gösterebilirsin:
 
 ```bash
-npm run build
-npx cap sync android
+pnpm run build
+pnpm exec cap sync android
 cd android
 JAVA_HOME=/yol/jdk-21 ./gradlew assembleDebug
 ```
@@ -133,7 +174,39 @@ adb install -r android/app/build/outputs/apk/debug/app-debug.apk
 adb shell am start -n com.tanricam.kaju/.MainActivity
 ```
 
-Bu makinede `Medium_Phone_API_36.0` AVD'siyle test edildi. Uygulama açılışta
+### Release / paylaşım APK'sı
+
+Release imzası `android/keystore.properties` + `android/keystore/` altındadır;
+ikisi de `.gitignore`'da. **Bu iki dosyayı kaybetme**: sonraki güncellemeler
+aynı anahtarla imzalanmazsa telefonda “uygulama güncellenemiyor” hatası çıkar.
+
+```bash
+pnpm run assets
+pnpm run mobile:art
+pnpm run build
+pnpm exec cap sync android
+cd android
+JAVA_HOME=/yol/jdk-21 ./gradlew assembleRelease bundleRelease
+```
+
+Çıktılar:
+
+```text
+android/app/build/outputs/apk/release/app-release.apk
+android/app/build/outputs/bundle/release/app-release.aab
+```
+
+APK doğrudan telefona kurulabilir; AAB Google Play içindir. Paylaşmak için
+imzalı APK'yı kopyalayabilirsin:
+
+```bash
+mkdir -p work/release
+cp android/app/build/outputs/apk/release/app-release.apk \
+   work/release/Tanricam-Kaju-1.0.0.apk
+```
+
+Bu makinede `Medium_Phone_API_36.0` AVD'siyle release APK kuruldu; logo,
+Android 12 splash ve menü görsel olarak kontrol edildi. Uygulama açılışta
 yatay moda kilitlenir, status bar gizlenir, Android geri tuşu oyunu duraklatır.
 
 ### iOS
@@ -141,9 +214,9 @@ yatay moda kilitlenir, status bar gizlenir, Android geri tuşu oyunu duraklatır
 Linux'ta iOS build alınamaz. macOS'ta:
 
 ```bash
-npx cap add ios
-npx cap sync ios
-npx cap open ios
+pnpm exec cap add ios
+pnpm exec cap sync ios
+pnpm exec cap open ios
 ```
 
 ## Proje yapısı

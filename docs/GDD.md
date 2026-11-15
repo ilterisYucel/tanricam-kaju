@@ -2,7 +2,7 @@
 
 **Oyun Tasarım Dokümanı (GDD) / Teknik Özet**
 
-- **Sürüm:** 0.3 (39 bölüm, R1/R2 uygulandı)
+- **Sürüm:** 1.0 (Android release; 39 bölüm, R1/R2 uygulandı)
 - **Tarih:** 15 Kasım 2026
 - **Platformlar:** Web (Vite), Android (Capacitor), iOS (macOS'ta derlenecek)
 - **Motor:** Phaser 3.90 + TypeScript
@@ -46,7 +46,7 @@
       kartları; `?touch=1` masaüstü önizleme.
 - [x] 39 matris yeniden üretildi; validator, preview, web testi, APK.
 
-**Kabul:** `npm run check`, `npm run build`, `validate:levels`,
+**Kabul:** `pnpm run check`, `pnpm run build`, `validate:levels`,
 `preview:levels`; web CDP testleri; Android debug APK.
 
 ---
@@ -158,7 +158,7 @@ E2     : ................................................................
 
 ### Doğrulama
 
-`npm run validate:levels`:
+`pnpm run validate:levels`:
 
 - 39 dosya, 39 benzersiz hayvan (0–38), boss yalnızca 39. bölümde.
 - İlk ground run x=0; her ground run `n × 1942`.
@@ -170,7 +170,7 @@ E2     : ................................................................
 - Suşi 35–210 px yükseklikte; düşmanlar doğru yüzeyde.
 - Hayvan ground run üzerinde.
 
-`npm run preview:levels` → `work/level-previews/01.png … 39.png`
+`pnpm run preview:levels` → `work/level-previews/01.png … 39.png`
 (gerçek tile'lar + renkli entity işaretleri).
 
 ---
@@ -584,10 +584,10 @@ android/                          Capacitor Android projesi
 ### Yeniden üretme
 
 ```bash
-npm run assets
-npm run validate:assets
-npm run validate:levels
-npm run preview:levels
+pnpm run assets
+pnpm run validate:assets
+pnpm run validate:levels
+pnpm run preview:levels
 ```
 
 `FRAME_CONFIG` / `MANUAL_CROPS` tabloları yeni sheet'ler için güncellenir.
@@ -599,10 +599,10 @@ npm run preview:levels
 ### Web
 
 ```bash
-npm install
-npm run dev
-npm run build
-npm run preview
+pnpm install
+pnpm run dev
+pnpm run build
+pnpm run preview
 ```
 
 - Vite `base: './'`; çıktı `dist/`.
@@ -612,8 +612,8 @@ npm run preview
 Gereksinim: Android SDK + **JDK 21** (Capacitor 8).
 
 ```bash
-npm run build
-npx cap sync android
+pnpm run build
+pnpm exec cap sync android
 cd android
 JAVA_HOME=/yol/jdk-21 ./gradlew assembleDebug
 ```
@@ -628,9 +628,9 @@ JAVA_HOME=/yol/jdk-21 ./gradlew assembleDebug
 Linux'ta derlenmez; macOS'ta:
 
 ```bash
-npx cap add ios
-npx cap sync ios
-npx cap open ios
+pnpm exec cap add ios
+pnpm exec cap sync ios
+pnpm exec cap open ios
 ```
 
 ---
@@ -638,9 +638,9 @@ npx cap open ios
 ## 19. Test ve doğrulama
 
 ```bash
-npm run check          # assets + levels + tsc
-npm run validate:levels
-npm run preview:levels
+pnpm run check          # assets + levels + tsc
+pnpm run validate:levels
+pnpm run preview:levels
 ```
 
 - Asset: 10 sheet, 15 image, 39 hayvan, zemin alpha + manifest boyutları.
@@ -677,6 +677,10 @@ npm run preview:levels
       DOMESTOS/SARMA ikon kartları (joystick değil); `?touch=1` ile
       masaüstünde önizleme; landscape, Android lifecycle.
 - [x] Android debug APK build + emülatör testi.
+- [x] `assets/logo.png` temiz logo; loading/menü ekranında ve Android
+      splash/launcher ikonlarında kullanılır (`pnpm run mobile:art`).
+- [x] İmzalı Android release APK + AAB (`versionName 1.0.0`); keystore
+      `android/keystore.properties` altında, git dışında.
 - [x] Web build, README, GDD, AGENTS.
 
 ### Planlanan / yapılmayan
@@ -686,7 +690,6 @@ npm run preview:levels
 - [ ] Checkpoint + bölüm ilerleme çubuğu (geniş bölümler için).
 - [ ] FAL ile boyalı arka planlar (şu an programatik).
 - [ ] Gerçek/üretilmiş müzik kaydı (şu an synth placeholder).
-- [ ] Özel app icon / splash.
 - [ ] iOS build ve fiziksel cihaz testi.
 
 ---
@@ -701,7 +704,7 @@ npm run preview:levels
 3. **Checkpoint + ilerleme barı**
    - Geniş bölümlerde her ~2500 px; kalp monitörü görseli; HUD çizgisi.
 4. **Cila**
-   - FAL arka planları; gerçek müzik; app icon/splash; nav bar gizleme; iOS.
+   - FAL arka planları; gerçek müzik; nav bar gizleme; iOS.
 
 ---
 

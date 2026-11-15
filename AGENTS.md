@@ -4,6 +4,20 @@ Tanrıçam & Kaju: Ionic React + Phaser 3.90 + Capacitor platformer.
 React (`src/pages/GamePage.tsx`) only mounts Phaser and owns native lifecycle;
 game code is plain TS under `src/game/`.
 
+## Monorepo
+
+This app is a git submodule at `apps/tanricam-kaju` inside `~/Documents/saru-nx`.
+Install and run from the monorepo root:
+
+- `pnpm install`
+- `pnpm nx run tanricam-kaju:serve` / `build` / `check`
+- `pnpm nx run tanricam-kaju:android-release` (JDK 21 + local keystore)
+- `pnpm --filter tanricam-kaju run <script>` also works.
+
+Commit inside the submodule first, push it, then update the parent gitlink in a
+separate parent commit. Never commit `android/keystore.properties`,
+`android/keystore/`, `.env`, `work/`, `dist/` or `node_modules/`.
+
 ## Workflow (three agents)
 
 New development always starts with the Plan agent; never skip planning.
@@ -13,7 +27,7 @@ New development always starts with the Plan agent; never skip planning.
    approval. It does not implement and edits nothing but `docs/**`.
 2. **User approves** — the user reads the plan in GDD and switches to the Build tab.
 3. **Build** (`build`, DeepSeek V4.1 Flash) — implements only the approved plan,
-   follows the rules above, runs `npm run check`, and ends with
+   follows the rules above, runs `pnpm run check`, and ends with
    "Uygulama tamam. Review'e geç." when done.
 4. **Review** (`review`, Qwen3.8 Flash, mode `all`) — the user switches to the
    Review tab. It checks the implementation against the GDD plan section and
@@ -27,20 +41,20 @@ Agent models and permissions live in `.opencode/opencode.json` and
 
 ## Commands
 
-- `npm run dev` — Vite. Configured port is 5173; if busy Vite silently uses 5174+.
-- `npm run assets` — regenerate sprites/manifest from the PNGs in `assets/`. Run before `check` when art or frame config changes.
-- `npm run check` — `validate:assets` -> `validate:levels` -> `tsc --noEmit`. Run before handoff; it does not build.
-- `npm run validate:levels` — parse all 39 matrices and enforce floor/raised/entity rules.
-- `npm run preview:levels` — render `work/level-previews/01.png..39.png` for eyeballing layouts.
-- `npm run build` — tsc + Vite to `dist/`.
-- Android: `npm run build && npx cap sync android`, then
+- `pnpm run dev` — Vite. Configured port is 5173; if busy Vite silently uses 5174+.
+- `pnpm run assets` — regenerate sprites/manifest from the PNGs in `assets/`. Run before `check` when art or frame config changes.
+- `pnpm run check` — `validate:assets` -> `validate:levels` -> `tsc --noEmit`. Run before handoff; it does not build.
+- `pnpm run validate:levels` — parse all 39 matrices and enforce floor/raised/entity rules.
+- `pnpm run preview:levels` — render `work/level-previews/01.png..39.png` for eyeballing layouts.
+- `pnpm run build` — tsc + Vite to `dist/`.
+- Android: `pnpm run build && pnpm exec cap sync android`, then
   `cd android && JAVA_HOME=<jdk21> ./gradlew assembleDebug`.
   **JDK 21 is required** (Capacitor 8); the installed JDK 17 fails with
   `invalid source release: 21`. Use Android Studio's JBR 21 or a local JDK 21.
 - APK: `android/app/build/outputs/apk/debug/app-debug.apk`; package `com.tanricam.kaju`.
   Test AVD: `Medium_Phone_API_36.0`.
 
-No unit-test runner. `npm run check` + manual browser/emulator play are the verification path.
+No unit-test runner. `pnpm run check` + manual browser/emulator play are the verification path.
 For a quick level jump, the dev global is exposed:
 `window.__game.scene.getScene('Menu').startLevel(i)` or
 `window.__game.scene.getScene('Game').goToLevel(i)` (0-based).
@@ -72,7 +86,7 @@ For a quick level jump, the dev global is exposed:
 - Entity rows `E0/E1/E2` are 96 proportional slots (ground / y=360 / y=252);
   see `assets/levels/README.md` for the letters. `k` marks the rescue animal;
   put sushi on `E1/E2` so upper routes have a reward.
-- After editing matrices: `npm run validate:levels` and `npm run preview:levels`.
+- After editing matrices: `pnpm run validate:levels` and `pnpm run preview:levels`.
 - Layout lives in `src/game/layout.ts`: `U = 720/10`, ground `8U = 576`,
   step `1.5U = 108`, gap `2.8U = 202`. Don't hardcode 560/440/340 again.
 
@@ -109,7 +123,13 @@ For a quick level jump, the dev global is exposed:
 - Generated: `public/assets/game/` and `src/game/data/manifest.json`; debug
   contact sheets/previews: `work/` (gitignored). Never hand-edit generated output.
 - New frames: edit `FRAME_CONFIG` / `MANUAL_CROPS` in `tools/build-assets.mjs`,
-  then `npm run assets`.
+  then `pnpm run assets`.
+- `assets/logo.png` is cleaned by `build-assets.mjs` into `logo` and shown on
+  the loading/menu screens. `pnpm run mobile:art` reuses the same cleaned logo
+  for Android splash screens and launcher icons (`tools/build-mobile-art.mjs`).
+- Release signing: `android/keystore.properties` + `android/keystore/` are
+  local, gitignored, and must be kept for update installs. `versionName` is in
+  `android/app/build.gradle`; bump `versionCode` for every shared update.
 - Background removal is local flood-fill, not FAL. `.env` holds `FAL_KEY`; never
   import it into `src/` or ship it. FAL is only for optional `tools/` art work.
 - Asset mapping: `zemin.png` = floor (there is no `floor.png`), `tanricam.png` =

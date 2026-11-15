@@ -11,9 +11,10 @@
     "assets": "node tools/build-assets.mjs",
     "validate:levels": "tsx tools/validate-levels.ts",
     "validate:assets": "node tools/validate-assets.mjs",
-    "check": "npm run validate:assets && npm run validate:levels && tsc --noEmit",
+    "check": "node tools/validate-assets.mjs && tsx tools/validate-levels.ts && tsc --noEmit",
     "cap:sync": "cap sync",
     "android": "cap open android",
+    "android:release": "pnpm run build && pnpm exec cap sync android && cd android && ./gradlew assembleRelease bundleRelease",
     "preview:levels": "tsx tools/preview-levels.ts",
     "mobile:art": "node tools/build-mobile-art.mjs"
   },

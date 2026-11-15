@@ -107,8 +107,8 @@ export class GameScene extends Phaser.Scene {
     });
 
     const start = this.level.platforms[0];
-    this.player = new Player(this, 140, start.y + FOOT_PAD);
-    this.lastSafe = { x: 140, y: start.y + FOOT_PAD };
+    this.player = new Player(this, 260, start.y + FOOT_PAD);
+    this.lastSafe = { x: 260, y: start.y + FOOT_PAD };
     this.kaju = new Kaju(this, this.player.x - 90, this.player.y);
 
     this.physics.add.collider(this.player, this.solids);

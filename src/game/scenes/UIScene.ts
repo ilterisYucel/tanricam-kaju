@@ -145,7 +145,7 @@ export class UIScene extends Phaser.Scene {
       fontStyle: 'bold',
       color: '#d7ffe9',
     }).setOrigin(0.5);
-    this.makeTouchCard(68, 468, 104, 96, {
+    this.makeTouchCard(68, 420, 104, 96, {
       fill: 0x1b3a33,
       fillHover: 0x2a5b4f,
       stroke: 0x7fe0c1,
@@ -157,7 +157,7 @@ export class UIScene extends Phaser.Scene {
     });
 
     const domestosIcon = this.add.image(0, 0, 'domestos-bottle-b').setScale(0.46);
-    this.makeTouchCard(68, 566, 104, 96, {
+    this.makeTouchCard(68, 518, 104, 96, {
       fill: 0x123a2b,
       fillHover: 0x1f5a42,
       stroke: 0x7fe0b0,
@@ -169,7 +169,7 @@ export class UIScene extends Phaser.Scene {
     });
 
     const sarmaIcon = this.add.image(0, 0, 'dolma').setScale(0.58);
-    this.makeTouchCard(68, 664, 104, 96, {
+    this.makeTouchCard(68, 616, 104, 96, {
       fill: 0x3a2a1e,
       fillHover: 0x5a402b,
       stroke: 0xf2b880,

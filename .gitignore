@@ -21,3 +21,5 @@ ios/DerivedData/
 
 # Generated working files
 work/
+package-lock.json
+*.tsbuildinfo
