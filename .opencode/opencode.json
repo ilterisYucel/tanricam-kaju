@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Yeni geliştirmeler planlama ile başlar; kullanıcı sonra Build sekmesine geçer.
+  "default_agent": "plan",
+  "agents": {
+    "plan": {
+      "model": "opencode-go/deepseek-v4-pro",
+      // Plan ajanı uygulama yapmaz; sadece planı GDD'ye yazar.
+      "permissions": [
+        { "action": "edit", "resource": "docs/**", "effect": "allow" }
+      ]
+    },
+    "build": {
+      "model": "opencode-go/deepseek-v4.1-flash"
+    }
+  }
+}

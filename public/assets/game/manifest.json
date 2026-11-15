@@ -1,0 +1,355 @@
+{
+  "sheets": {
+    "hero-walk": {
+      "url": "assets/game/hero-walk.png",
+      "frameWidth": 134,
+      "frameHeight": 201,
+      "count": 7
+    },
+    "hero-idle": {
+      "url": "assets/game/hero-idle.png",
+      "frameWidth": 134,
+      "frameHeight": 201,
+      "count": 5
+    },
+    "hero-run": {
+      "url": "assets/game/hero-run.png",
+      "frameWidth": 134,
+      "frameHeight": 201,
+      "count": 2
+    },
+    "kaju-run": {
+      "url": "assets/game/kaju-run.png",
+      "frameWidth": 123,
+      "frameHeight": 108,
+      "count": 10
+    },
+    "doctor-walk": {
+      "url": "assets/game/doctor-walk.png",
+      "frameWidth": 77,
+      "frameHeight": 115,
+      "count": 7
+    },
+    "doctor-charge": {
+      "url": "assets/game/doctor-charge.png",
+      "frameWidth": 77,
+      "frameHeight": 115,
+      "count": 3
+    },
+    "nurse-walk": {
+      "url": "assets/game/nurse-walk.png",
+      "frameWidth": 71,
+      "frameHeight": 114,
+      "count": 7
+    },
+    "nurse-attack": {
+      "url": "assets/game/nurse-attack.png",
+      "frameWidth": 71,
+      "frameHeight": 114,
+      "count": 2
+    },
+    "microbe-skins": {
+      "url": "assets/game/microbe-skins.png",
+      "frameWidth": 100,
+      "frameHeight": 106,
+      "count": 5
+    },
+    "pus-stages": {
+      "url": "assets/game/pus-stages.png",
+      "frameWidth": 77,
+      "frameHeight": 70,
+      "count": 5
+    }
+  },
+  "images": {
+    "dolma": {
+      "url": "assets/game/dolma.png",
+      "width": 75,
+      "height": 62
+    },
+    "domestos-bottle": {
+      "url": "assets/game/domestos-bottle.png",
+      "width": 123,
+      "height": 75
+    },
+    "domestos-bottle-b": {
+      "url": "assets/game/domestos-bottle-b.png",
+      "width": 87,
+      "height": 98
+    },
+    "domestos-burst": {
+      "url": "assets/game/domestos-burst.png",
+      "width": 121,
+      "height": 72
+    },
+    "high-floor-a": {
+      "url": "assets/game/high-floor-a.png",
+      "width": 501,
+      "height": 441,
+      "surfaceOffset": 0
+    },
+    "high-floor-b": {
+      "url": "assets/game/high-floor-b.png",
+      "width": 419,
+      "height": 266,
+      "surfaceOffset": 0
+    },
+    "high-floor-c": {
+      "url": "assets/game/high-floor-c.png",
+      "width": 270,
+      "height": 371,
+      "surfaceOffset": 193
+    },
+    "high-floor-decor": {
+      "url": "assets/game/high-floor-decor.png",
+      "width": 260,
+      "height": 296
+    },
+    "high-floor-e": {
+      "url": "assets/game/high-floor-e.png",
+      "width": 326,
+      "height": 410,
+      "surfaceOffset": 125
+    },
+    "logo": {
+      "url": "assets/game/logo.png",
+      "width": 136,
+      "height": 174
+    },
+    "sushi-0": {
+      "url": "assets/game/sushi-0.png",
+      "width": 65,
+      "height": 76
+    },
+    "sushi-1": {
+      "url": "assets/game/sushi-1.png",
+      "width": 70,
+      "height": 77
+    },
+    "sushi-2": {
+      "url": "assets/game/sushi-2.png",
+      "width": 56,
+      "height": 53
+    },
+    "sushi-3": {
+      "url": "assets/game/sushi-3.png",
+      "width": 70,
+      "height": 46
+    },
+    "sushi-4": {
+      "url": "assets/game/sushi-4.png",
+      "width": 95,
+      "height": 61
+    },
+    "sushi-5": {
+      "url": "assets/game/sushi-5.png",
+      "width": 97,
+      "height": 68
+    }
+  },
+  "animals": {
+    "animal-00": {
+      "url": "assets/game/animals/animal-00.png",
+      "width": 97,
+      "height": 99
+    },
+    "animal-01": {
+      "url": "assets/game/animals/animal-01.png",
+      "width": 94,
+      "height": 104
+    },
+    "animal-02": {
+      "url": "assets/game/animals/animal-02.png",
+      "width": 104,
+      "height": 93
+    },
+    "animal-03": {
+      "url": "assets/game/animals/animal-03.png",
+      "width": 86,
+      "height": 88
+    },
+    "animal-04": {
+      "url": "assets/game/animals/animal-04.png",
+      "width": 86,
+      "height": 85
+    },
+    "animal-05": {
+      "url": "assets/game/animals/animal-05.png",
+      "width": 101,
+      "height": 91
+    },
+    "animal-06": {
+      "url": "assets/game/animals/animal-06.png",
+      "width": 106,
+      "height": 97
+    },
+    "animal-07": {
+      "url": "assets/game/animals/animal-07.png",
+      "width": 124,
+      "height": 81
+    },
+    "animal-08": {
+      "url": "assets/game/animals/animal-08.png",
+      "width": 139,
+      "height": 102
+    },
+    "animal-09": {
+      "url": "assets/game/animals/animal-09.png",
+      "width": 135,
+      "height": 109
+    },
+    "animal-10": {
+      "url": "assets/game/animals/animal-10.png",
+      "width": 144,
+      "height": 90
+    },
+    "animal-11": {
+      "url": "assets/game/animals/animal-11.png",
+      "width": 157,
+      "height": 92
+    },
+    "animal-12": {
+      "url": "assets/game/animals/animal-12.png",
+      "width": 136,
+      "height": 102
+    },
+    "animal-13": {
+      "url": "assets/game/animals/animal-13.png",
+      "width": 109,
+      "height": 109
+    },
+    "animal-14": {
+      "url": "assets/game/animals/animal-14.png",
+      "width": 101,
+      "height": 104
+    },
+    "animal-15": {
+      "url": "assets/game/animals/animal-15.png",
+      "width": 120,
+      "height": 99
+    },
+    "animal-16": {
+      "url": "assets/game/animals/animal-16.png",
+      "width": 87,
+      "height": 99
+    },
+    "animal-17": {
+      "url": "assets/game/animals/animal-17.png",
+      "width": 99,
+      "height": 104
+    },
+    "animal-18": {
+      "url": "assets/game/animals/animal-18.png",
+      "width": 118,
+      "height": 104
+    },
+    "animal-19": {
+      "url": "assets/game/animals/animal-19.png",
+      "width": 130,
+      "height": 105
+    },
+    "animal-20": {
+      "url": "assets/game/animals/animal-20.png",
+      "width": 130,
+      "height": 105
+    },
+    "animal-21": {
+      "url": "assets/game/animals/animal-21.png",
+      "width": 145,
+      "height": 107
+    },
+    "animal-22": {
+      "url": "assets/game/animals/animal-22.png",
+      "width": 137,
+      "height": 102
+    },
+    "animal-23": {
+      "url": "assets/game/animals/animal-23.png",
+      "width": 144,
+      "height": 105
+    },
+    "animal-24": {
+      "url": "assets/game/animals/animal-24.png",
+      "width": 139,
+      "height": 107
+    },
+    "animal-25": {
+      "url": "assets/game/animals/animal-25.png",
+      "width": 147,
+      "height": 110
+    },
+    "animal-26": {
+      "url": "assets/game/animals/animal-26.png",
+      "width": 129,
+      "height": 81
+    },
+    "animal-27": {
+      "url": "assets/game/animals/animal-27.png",
+      "width": 109,
+      "height": 92
+    },
+    "animal-28": {
+      "url": "assets/game/animals/animal-28.png",
+      "width": 112,
+      "height": 92
+    },
+    "animal-29": {
+      "url": "assets/game/animals/animal-29.png",
+      "width": 103,
+      "height": 93
+    },
+    "animal-30": {
+      "url": "assets/game/animals/animal-30.png",
+      "width": 94,
+      "height": 85
+    },
+    "animal-31": {
+      "url": "assets/game/animals/animal-31.png",
+      "width": 105,
+      "height": 85
+    },
+    "animal-32": {
+      "url": "assets/game/animals/animal-32.png",
+      "width": 104,
+      "height": 90
+    },
+    "animal-33": {
+      "url": "assets/game/animals/animal-33.png",
+      "width": 126,
+      "height": 69
+    },
+    "animal-34": {
+      "url": "assets/game/animals/animal-34.png",
+      "width": 118,
+      "height": 84
+    },
+    "animal-35": {
+      "url": "assets/game/animals/animal-35.png",
+      "width": 113,
+      "height": 73
+    },
+    "animal-36": {
+      "url": "assets/game/animals/animal-36.png",
+      "width": 116,
+      "height": 89
+    },
+    "animal-37": {
+      "url": "assets/game/animals/animal-37.png",
+      "width": 127,
+      "height": 95
+    },
+    "animal-38": {
+      "url": "assets/game/animals/animal-38.png",
+      "width": 102,
+      "height": 85
+    }
+  },
+  "floor": {
+    "strip": {
+      "url": "assets/game/floor-strip.png",
+      "width": 1942,
+      "height": 302,
+      "surfaceOffset": 150
+    }
+  }
+}

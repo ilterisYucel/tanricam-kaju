@@ -1,0 +1,41 @@
+{
+  "name": "tanricam-kaju",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tanricam & Kaju: Hastane Nobeti",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "assets": "node tools/build-assets.mjs",
+    "validate:levels": "tsx tools/validate-levels.ts",
+    "validate:assets": "node tools/validate-assets.mjs",
+    "check": "npm run validate:assets && npm run validate:levels && tsc --noEmit",
+    "cap:sync": "cap sync",
+    "android": "cap open android",
+    "preview:levels": "tsx tools/preview-levels.ts",
+    "mobile:art": "node tools/build-mobile-art.mjs"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.2",
+    "@capacitor/screen-orientation": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4",
+    "@ionic/react": "^9.0.11",
+    "phaser": "^3.90.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "sharp": "^0.35.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.8"
+  }
+}

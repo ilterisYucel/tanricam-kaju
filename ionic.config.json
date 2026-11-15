@@ -1,0 +1,7 @@
+{
+  "name": "tanricam-kaju",
+  "type": "react",
+  "integrations": {
+    "capacitor": {}
+  }
+}
